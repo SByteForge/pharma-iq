@@ -1,28 +1,29 @@
-# 🧠 pharma-iq
+# pharma-iq
 
-*AI-Powered Pharmaceutical Contract Intelligence Platform*
+Design document for an experimental pharmaceutical contract RAG prototype
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.128.0-green.svg)](https://fastapi.tiangolo.com/)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-1.5.5-orange.svg)](https://www.trychroma.com/)
 [![Ollama](https://img.shields.io/badge/Ollama-Latest-purple.svg)](https://ollama.ai/)
 
-> **Transform pharmaceutical contract analysis with AI-powered intelligence**
+This README is a technical design document with implementation status, architectural decisions, and known limitations.
 
-pharma-iq is a specialized Retrieval-Augmented Generation (RAG) system designed specifically for pharmaceutical contract analysis. Built for healthcare and life sciences professionals, it enables instant, accurate answers to complex contract questions through intelligent document processing and local AI execution.
+Current status: prototype with local LLM inference, vector search, and PDF ingestion for contract text. Not production-certified; evaluators should run in a controlled environment.
 
-## 📋 Table of Contents
+pharma-iq is an engineering prototype implementing a domain-adapted RAG workflow for pharmaceutical contract data. It focuses on operationally verifiable behavior rather than marketing claims. Current implementation covers ingestion, embedding, retrieval, and LLM answer generation with local dependencies (Ollama + ChromaDB).
+## Table of Contents
 
-- [🏗️ Architecture Overview](#-architecture-overview)
-- [✨ Key Features](#-key-features)
-- [🚀 Quick Start](#-quick-start)
-- [📁 Project Structure](#-project-structure)
-- [🔧 API Reference](#-api-reference)
-- [🛠️ Development](#-development)
-- [🔍 Technical Decisions](#-technical-decisions)
-- [📊 Performance Considerations](#-performance-considerations)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+- [Architecture Overview](#architecture-overview)
+- [Implemented Capabilities and Limitations](#implemented-capabilities-and-limitations)
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [Development](#development)
+- [Technical Decisions](#technical-decisions)
+- [Performance Considerations](#performance-considerations)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## 🏗️ Architecture Overview
 
@@ -82,28 +83,32 @@ pharma-iq is a specialized RAG (Retrieval-Augmented Generation) system designed 
 | **Logging** | Loguru | Structured logging with rotation |
 | **Validation** | Pydantic | Runtime type checking and API validation |
 
-## ✨ Key Features
+## Implemented Capabilities and Limitations
 
-### 🔍 Pharmaceutical Contract Intelligence
-- **Rebate Analysis**: Instant analysis of complex rebate structures and tiers
-- **Clause Extraction**: Automated identification of key contractual terms
-- **Compliance Checking**: GDPR-compliant, local AI execution
-- **Contract Comparison**: Side-by-side analysis of multiple agreements
+### What Works Today
+- Ingestion pipeline from PDF files to text chunks via `app/ingestion/pdf_chunker.py`
+- Vector indexing in ChromaDB via `app/ingestion/vector_store.py`
+- Query path: `GET /ask/`, `POST /generate/`, `POST /generate-stream/` (local Ollama backend)
+- RAG prompt assembly with retrieved context and static prompt templates
+- Health check and status endpoints (`/`, `/ping`)
 
-### 📄 Specialized Document Processing
-- **Pharma-Optimized Chunking**: 512-token chunks with 50-token overlap for complete clause capture
-- **Contract Structure Recognition**: Intelligent parsing of pharmaceutical contract formats
-- **Metadata Preservation**: Track document versions, effective dates, and amendments
+### Design Decisions
+- 512-token chunk size + 50-token overlap selected to keep clause continuity and trade precision vs context size
+- `nomic-embed-text` chosen for local embedding inference and no external API dependency
+- ChromaDB chosen for local persistent vector store; no distributed cluster behavior in current implementation
 
-### 🧠 Privacy-First AI
-- **Local Execution**: Zero data transmission - all processing stays on-premise
-- **HIPAA Considerations**: Architecture designed for healthcare data sensitivity
-- **Audit Trail**: Complete logging of all AI interactions and decisions
+### Known Limitations
+- No legal or regulatory validation in this repository; outputs should be considered draft guidance
+- RBAC is a noted architecture goal but not enforced in code path shown here
+- Contract comparison is not implemented; claims in early versions were aspirational
+- Answer quality depends on local model and prompt engineering; hallucination mitigation is minimal
+- Bulk/large-scale ingestion beyond 100k chunks is not benchmarked and requires sharding/caching improvements
+- Observability is basic file-based logs; no central monitoring pipeline included
 
-### 🛡️ Enterprise Ready
-- **Role-Based Access**: Multi-tenant architecture for different user types
-- **Audit Compliance**: Comprehensive logging and traceability
-- **High Availability**: Production-grade error handling and recovery
+### Explicit exclusions
+- External cloud model APIs (OpenAI/Azure) are not part of this codebase
+- Enterprise auth middleware (JWT/OAuth/SSO) omitted
+- Kubernetes manifests not included; run with `uvicorn` locally
 
 ## 🚀 Quick Start
 
@@ -344,7 +349,7 @@ LOG_FILE=app.log
 - **Batch Processing**: Bulk ingestion for multiple documents
 - **Async Operations**: Non-blocking I/O for concurrent requests
 
-## 🤝 Contributing
+## Contributing
 
 ### Development Workflow
 
@@ -387,7 +392,7 @@ LOG_FILE=app.log
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Ollama** for local LLM execution
 - **ChromaDB** for vector database functionality

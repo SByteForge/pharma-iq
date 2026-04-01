@@ -1,4 +1,4 @@
-# 🧠 PharmIq
+# 🧠 pharma-iq
 
 *AI-Powered Pharmaceutical Contract Intelligence Platform*
 
@@ -9,7 +9,7 @@
 
 > **Transform pharmaceutical contract analysis with AI-powered intelligence**
 
-PharmIq is a specialized Retrieval-Augmented Generation (RAG) system designed specifically for pharmaceutical contract analysis. Built for healthcare and life sciences professionals, it enables instant, accurate answers to complex contract questions through intelligent document processing and local AI execution.
+pharma-iq is a specialized Retrieval-Augmented Generation (RAG) system designed specifically for pharmaceutical contract analysis. Built for healthcare and life sciences professionals, it enables instant, accurate answers to complex contract questions through intelligent document processing and local AI execution.
 
 ## 📋 Table of Contents
 
@@ -26,7 +26,7 @@ PharmIq is a specialized Retrieval-Augmented Generation (RAG) system designed sp
 
 ## 🏗️ Architecture Overview
 
-PharmIq is a specialized RAG (Retrieval-Augmented Generation) system designed for enterprise pharmaceutical contract analysis. The system follows a modular, production-ready architecture with clear separation of concerns, optimized for healthcare compliance and data privacy.
+pharma-iq is a specialized RAG (Retrieval-Augmented Generation) system designed for enterprise pharmaceutical contract analysis. The system follows a modular, production-ready architecture with clear separation of concerns, optimized for healthcare compliance and data privacy.
 
 ### Core Components
 
@@ -406,4 +406,4 @@ For questions, issues, or contributions:
 ---
 
 *Built with ❤️ for intelligent document analysis*</content>
-<parameter name="filePath">/Users/shubhamtiwari/devForge/llm-knowledge-engine/README.md
+<parameter name="filePath">/Users/shubhamtiwari/devForge/pharma-iq/README.md

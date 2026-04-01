@@ -1,0 +1,21 @@
+PHARMA REBATE CONTRACT AGREEMENT
+
+Article 1 - Rebate Tiers
+Manufacturer agrees to pay rebates based on formulary tier placement.
+Tier 1 placement: 15% rebate on net sales.
+Tier 2 placement: 8% rebate on net sales.
+Tier 3 placement: 3% rebate on net sales.
+
+Article 2 - Market Share Requirements
+Rebates are conditional on achieving minimum market share thresholds.
+Tier 1 rebate requires minimum 35% market share in therapeutic class.
+Tier 2 rebate requires minimum 20% market share in therapeutic class.
+
+Article 3 - True-Up Clause
+Quarterly reconciliation will be performed against actual dispensing data.
+If market share falls below threshold, rebate reverts to next tier rate.
+True-up payments due within 30 days of quarter close.
+
+Article 4 - Compliance and Audit
+Manufacturer has right to audit dispensing records annually.
+Payer must retain records for minimum 5 years.

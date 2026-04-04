@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from loguru import logger
 
-DB_PATH = Path("./pharma_iq.db")
+from app.core.config import DB_PATH
 
 
 class SessionStore:

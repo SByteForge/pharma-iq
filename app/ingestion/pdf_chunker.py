@@ -5,6 +5,7 @@ from pypdf import PdfReader
 from app.core.errors import DocumentParseError
 
 
+
 # --- Why 512 tokens with 50 overlap? ---
 # Pharma contracts have clause-level logic. A rebate tier clause
 # is typically 200-400 words. 512 tokens captures a full clause
@@ -12,9 +13,9 @@ from app.core.errors import DocumentParseError
 # split at a chunk boundary still appears in full in one of the chunks.
 # Too large (1024+): retrieval becomes imprecise, unrelated clauses mixed.
 # Too small (128): multi-condition clauses get split, losing logical context.
-CHUNK_SIZE = 512
-CHUNK_OVERLAP = 50
-MIN_CHUNK_LENGTH = 50  # discard chunks that are just whitespace or headers
+
+from app.core.config import CHUNK_SIZE, CHUNK_OVERLAP
+MIN_CHUNK_LENGTH = 50  # keep this here — it is not user-configurable
 
 
 def extract_text_from_pdf(file_path: Path) -> str:

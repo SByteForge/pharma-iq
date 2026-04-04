@@ -41,7 +41,7 @@ app = FastAPI(
 
 session_store = SessionStore()
 
-OLLAMA_MODEL = "mistral"
+from app.core.config import OLLAMA_MODEL
 
 
 # --- Request / Response models ---

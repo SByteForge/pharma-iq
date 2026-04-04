@@ -11,11 +11,7 @@ from app.core.errors import EmbeddingError, EmptyRetrievalError
 # With disk persistence, ingest once, query forever.
 # At scale this becomes a managed vector DB (Pinecone, Weaviate) —
 # the interface stays identical, only the client changes.
-CHROMA_PATH = Path("./chroma_db")
-COLLECTION_NAME = "pharma_contracts"
-EMBED_MODEL = "nomic-embed-text"   # free, local, no API key needed
-TOP_K = 3  # retrieve top 3 chunks per query — enough context, low noise
-
+from app.core.config import CHROMA_PATH, COLLECTION_NAME, EMBED_MODEL, TOP_K
 
 def get_collection() -> chromadb.Collection:
     """
